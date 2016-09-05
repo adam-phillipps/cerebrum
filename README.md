@@ -1,8 +1,8 @@
 ################################################################################
 #                           Cerebrum's workflow
 ################################################################################
-1. Step 1 Check the brain_backlog                                                  *1
-  * Item 1 the parameters in the messages give the location of the files that the
+1. Check the brain_backlog                                                  *1
+  * The parameters in the messages give the location of the files that the
       Cerebrum will use to create the environment for the Neurons
       - messages look like this: 
       ```Javascript
@@ -15,15 +15,13 @@
             }                                                     
         }
       ```
-  - The S3 object has the actual `custom_cerebrum_task.rb` for this specific
-      project
-  - Dynamically require/load whatever this file in the delegaor module? and stick
-      it in `<path to>/<repo>/lib/`.  The file has the ratio in it instead
-      of .env and other things like that
-    - Create the custom project backlog, wip, count, finished queues
-    - Create neurons # normal workflow (since v1 basically)
-      - Tag instances with the name of the project
-        - The name of the tag guarantees we'll find the correct backlog
+  * The S3 object has the actual `custom_cerebrum_task.rb` for this specific project
+2. Dynamically require/load whatever this file and stick it in `<path to>/<repo>/lib/`.
+      The file has the ratio in it instead of it living in .env and other things like that
+    1. Create the custom project backlog, wip, count, finished queues
+    2. Create neurons # normal workflow (since v1 basically)
+      1. Tag instances with the name of the project
+        * The name of the tag guarantees we'll find the correct backlog
     - Populate the custom_backlog, one message for each instance with 
         messages like this:
         {
