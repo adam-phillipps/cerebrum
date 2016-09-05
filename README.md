@@ -1,19 +1,20 @@
 ################################################################################
 #                           Cerebrum's workflow
 ################################################################################
-1. Check the brain_backlog                                                  *1
-  - the parameters in the messages give the location of the files that the
+1. Step 1 Check the brain_backlog                                                  *1
+  * Item 1 the parameters in the messages give the location of the files that the
       Cerebrum will use to create the environment for the Neurons
       - messages look like this: 
+      ```Javascript
         {
-          'backlog':'named_backlog',                                        *2
-          'task-env':'s3-file',                                             *3
+          'backlog':'named_backlog',   *2
+          'task-env':'s3-file',        *3
           'metadata':
             {
               'x-amz-website-redirect-location':'neuron_task_s3_location'   *4
             }                                                     
         }
-  
+      ```
   - The S3 object has the actual `custom_cerebrum_task.rb` for this specific
       project
   - Dynamically require/load whatever this file in the delegaor module? and stick
@@ -54,8 +55,8 @@ _Notes, additional info and TODOs:_
       and is based off the name of the project it is for.  That is also what
       guarantees it can be used for all other environment config and tasks
 - *4  The metadata on an S3 object already contains a key:value pair called
-      http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html?shortFooter=true#object-metadata
+      [S3 Object Metadata]http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html?shortFooter=true#object-metadata
       and
-      http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html?shortFooter=true
+      [Setting up a redirect]http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html?shortFooter=true
 - *5  For more information of the Neurons, their workflow and some more, go do
       the Neuron repo and read the README.md
