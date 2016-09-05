@@ -41,19 +41,19 @@
         from the above (brain board messages)
 
 _Notes, additional info and TODOs:_
-*1  It would be better to have this in a stream with a lambda that turns on an
+- *1  It would be better to have this in a stream with a lambda that turns on an
       individual brain by starting a Cerebrum EC2 instance
 
-*2  This board becomes the backlog the neurons will be tied to.  The Cerebrum
+- *2  This board becomes the backlog the neurons will be tied to.  The Cerebrum
       may make changes to the messages and actually use a different queue
       but this board is the real entry-point for work to begin from a request
       from the BrainManager
-*3  The key of this file is also a unique identifier (per AWS) in its bucket
+- *3  The key of this file is also a unique identifier (per AWS) in its bucket
       and is based off the name of the project it is for.  That is also what
       guarantees it can be used for all other environment config and tasks
-*4  The metadata on an S3 object already contains a key:value pair called
+- *4  The metadata on an S3 object already contains a key:value pair called
       http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html?shortFooter=true#object-metadata
       and
       http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html?shortFooter=true
-*5  For more information of the Neurons, their workflow and some more, go do
+- *5  For more information of the Neurons, their workflow and some more, go do
       the Neuron repo and read the README.md
