@@ -8,27 +8,33 @@
       ```Javascript
         {
           'backlog':'named_backlog',   *2
-          'task-env':'s3-file',        *3
-          'metadata':
-            {
-              'x-amz-website-redirect-location':'neuron_task_s3_location'   *4
-            }                                                     
+          'task-env':'s3-file'        *3                                                    
         }
       ```
-  * The S3 object has the actual `custom_cerebrum_task.rb` for this specific project
+  * The S3 object has the actual `custom_cerebrum_task.rb` for this specific project.
+    it also contains information about the `custom_neuron_task.rb` in the S3 metadata.
+    - S3 object metadata
+    ```Javascript
+      'metadata': *4
+        {
+          'x-amz-website-redirect-location':'neuron_task_s3_location',
+          ...
+        } 
+    ```
 2. Dynamically require/load whatever this file and stick it in `<path to>/<repo>/lib/`.
       The file has the ratio in it instead of it living in .env and other things like that
-    1. Create the custom project backlog, wip, count, finished queues
-    2. Create neurons # normal workflow (since v1 basically)
-      1. Tag instances with the name of the project
-        * The name of the tag guarantees we'll find the correct backlog
-    - Populate the custom_backlog, one message for each instance with 
-        messages like this:
-        {
-          'extraInfo':{'any-useful-params':'or-other-good-stuff'},
-          'task-env':'s3-location of task' # see *1 for details on how 
-        }
-      
+3. Create the custom project backlog, wip, count, finished and needs_attention queues
+4. Create neurons # normal workflow (since v1 basically)
+5. Tag instances with the name of the project
+    * The name of the tag guarantees we'll find the correct backlog
+6. Populate the custom_backlog, one message for each instance with 
+    - messages like this:
+    ```Javasript
+    {
+      'extraInfo':{'any-useful-params':'or-other-good-stuff'},
+      'task-env':'s3-location of task' # see *1 for details on how 
+    }
+    ```
       - neuron starts, waits for custom_backlog to be ready and then it polls 
         and grabs a message.                                                *5
           messages like this:
