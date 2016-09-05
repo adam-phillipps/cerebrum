@@ -1,6 +1,8 @@
 ################################################################################
-#                           Cerebrum's workflow
+## Cerebrum
 ################################################################################
+
+## Workflow
 1. Check the brain_backlog                                                  *1
   * The parameters in the messages give the location of the files that the
       Cerebrum will use to create the environment for the Neurons
@@ -49,9 +51,8 @@
         from the above (brain board messages)
 
 
-___________________________________
-Notes, additional info and TODOs:
-___________________________________
+
+##Notes, additional info and TODOs:
 * *1  It would be better to have this in a stream with a lambda that turns on an
       individual brain by starting a Cerebrum EC2 instance
 
