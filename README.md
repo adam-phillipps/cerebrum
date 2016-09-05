@@ -21,6 +21,8 @@
       of .env and other things like that
     - Create the custom project backlog, wip, count, finished queues
     - Create neurons # normal workflow (since v1 basically)
+      - Tag instances with the name of the project
+        - The name of the tag guarantees we'll find the correct backlog
     - Populate the custom_backlog, one message for each instance with 
         messages like this:
         {
