@@ -49,10 +49,12 @@
       * The number of messages is always 1/1 for this and all other neuron 
         backlogs. The Cerebrum has to convert the ratio from the message 
         from the above (brain board messages)
+  7.  Repeat from step 1.  This can create another Brain, set of Neurons or 
+        any other Brain related tasks.
 
 
 
-##Notes, additional info and TODOs:
+## Notes, additional info and TODOs:
 * *1  It would be better to have this in a stream with a lambda that turns on an
       individual brain by starting a Cerebrum EC2 instance
 
@@ -69,3 +71,6 @@
       [Setting up a redirect]http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html?shortFooter=true
 * *5  For more information of the Neurons, their workflow and some more, go do
       the Neuron repo and read the README.md
+
+## Future:
+  * Brain can create clusters of streams (Synapsies) or other Brains etc.
