@@ -49,8 +49,8 @@
       * The number of messages is always 1/1 for this and all other neuron 
         backlogs. The Cerebrum has to convert the ratio from the message 
         from the above (brain board messages)
-  7.  Repeat from step 1.  This can create another Brain, set of Neurons or 
-        any other Brain related tasks.
+7.  Repeat from step 1.  This can create another Brain, set of Neurons or 
+      any other Brain related tasks.
 
 
 
