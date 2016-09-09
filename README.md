@@ -1,6 +1,15 @@
+_Smash::Brain API documentation_
 ################################################################################
 # Cerebrum
 ################################################################################
+
+- _lingo: 
+- _Brain: is many nodes (Neurons) and at least one Cerebrum_
+- _Cerebrum: The piece of the Brain that is in charge of understanding the 
+  work that needs to be done and figures out how to divy that work out to
+  many Neurons_
+- _Neuron: The piece of the Brain that the Cerebrum starts to do the work
+  that solves the problem the project is about_
 
 ## Workflow
 1. Check the brain_backlog                                                  *1
@@ -72,5 +81,14 @@
 * *5  For more information of the Neurons, their workflow and some more, go do
       the Neuron repo and read the README.md
 
-## Future:
-  * Brain can create clusters of streams (Synapsies) or other Brains etc.
+## Ideas:
+* Cerebrums can create clusters of streams (Synapsies) or other Brains etc._
+
+* _A global memory, so that all nodes in the brain can communicate_
+  * _use the Synapse package to always send a variable and it's value in a
+    message to the pipe whenever it is set.  consuming nodes can listen for
+    all these variables in a partition id or something like that.  
+    the listening would start from the first time the variable is needed._
+  * _use very few variables and sns topics.  the variables might be able to be
+    fairly complex, like mapping simple objects of tasks and other listening
+    apps could use them to build environments/contexts for tasks etc._
