@@ -63,6 +63,16 @@ _Smash::Brain API documentation_
 
 
 
+## The Next Next Branch:
+* a use case is a large number of neurons are sitting
+  inactive for 15 more minutes until their shutdown time.  they have no more
+  work to do but another cerebrum needs 10 more of the same kind of instance
+  (possibly a similar ami symantics) so instead of creating 10 new neurons,
+  it uses the existing ones.  that saved 150 minutes and because the previous
+  branch made all the neurons pipe consumers too, they can update each other with the neurons usage, status and all sorts of other things
+
+
+
 ## Notes, additional info and TODOs:
 * *1  It would be better to have this in a stream with a lambda that turns on an
       individual brain by starting a Cerebrum EC2 instance
