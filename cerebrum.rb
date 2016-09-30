@@ -1,32 +1,22 @@
 require 'dotenv'
 Dotenv.load('.cerebrum.env')
+require 'cloud_powers'
+require 'pathname'
+require 'byebug'
 require_relative 'job'
 require_relative 'task'
-require_relative './lib/cloud_powers/aws_resources'
-require_relative './lib/cloud_powers/auth'
-require_relative './lib/cloud_powers/delegator'
-require_relative './lib/cloud_powers/helper'
-require_relative './lib/cloud_powers/self_awareness'
-require_relative './lib/cloud_powers/smash_error'
-require_relative './lib/cloud_powers/storage'
-require_relative './lib/cloud_powers/synapse/pipe'
-require_relative './lib/cloud_powers/synapse/queue'
-require 'byebug'
 
 module Smash
   class Cerebrum
-    extend Delegator
-    include Smash::CloudPowers::Auth
-    include Smash::CloudPowers::AwsResources
-    include Smash::CloudPowers::Helper
-    include Smash::CloudPowers::SelfAwareness
-    include Smash::CloudPowers::Storage
-    include Smash::CloudPowers::Synapse
+    include CloudPowers
 
     attr_accessor :neuron_ids
 
+    # Gathers some information about the Context this Cerebrum will run in
     def initialize
       # begin
+        byebug
+        project_root
         @neuron_ids = []
         logger.info "Cerebrum waking..."
         # Smash::CloudPowers::SmashError.build(:ruby, :workflow, :task)
@@ -34,8 +24,6 @@ module Smash
         # @status_thread = Thread.new do
           # send_frequent_status_updates(interval: 15, identity: 'cerebrum')
         # end
-        byebug
-        until should_stop? do work end
       # rescue Exception => e
       #   error_message = format_error_message(e)
       #   logger.fatal "Rescued in initialize method: creyap...#{error_message}"
@@ -44,7 +32,7 @@ module Smash
     end
 
     def more_work?
-      get_count(:backlog) > 0
+      get_count(:job_requests) > 0
     end
 
     def process(job)
@@ -78,6 +66,11 @@ module Smash
       time_is_up? ? more_work? : false
     end
 
+    def start!
+      byebug
+      until should_stop? do work end
+    end
+
     def time_is_up?
       # returns true when the hour mark approaches
       an_hours_time = 60 * 60
@@ -96,4 +89,7 @@ module Smash
   end
 end
 
-Smash::Cerebrum.new
+if __FILE__==$0
+  # this will only run if the script was the main, not load'd or require'd
+  Smash::Cerebrum.new.start!
+end
