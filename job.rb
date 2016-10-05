@@ -1,18 +1,13 @@
-require_relative './lib/cloud_powers/aws_resources'
-require_relative './lib/cloud_powers/synapse/pipe'
-require_relative './lib/cloud_powers/synapse/queue'
-require_relative './lib/cloud_powers/delegator'
-require_relative './lib/cloud_powers/helper'
-require_relative './lib/cloud_powers/workflow'
+require 'cloud_powers'
 
 module Smash
   class   Job
-    extend Smash::Delegator
-    include Smash::CloudPowers::Auth
-    include Smash::CloudPowers::AwsResources
-    include Smash::CloudPowers::Helper
-    include Smash::CloudPowers::Synapse::Pipe
-    include Smash::CloudPowers::Synapse::Queue
+    extend CloudPowers::Delegator
+    include CloudPowers::Auth
+    include CloudPowers::AwsResources
+    include CloudPowers::Helper
+    include CloudPowers::Synapse::Pipe
+    include CloudPowers::Synapse::Queue
 
     attr_reader :instance_id, :message, :message_body, :neuron_ids, :workflow
 
@@ -25,7 +20,7 @@ module Smash
     end
 
     def backlog
-      Smash::CloudPowers::Synapse::Queue::Board.new('JobRequests')
+      CloudPowers::Synapse::Queue::Board.new('JobRequests')
     end
 
     def instance_config(opts = {})
@@ -54,7 +49,7 @@ module Smash
         ec2.wait_until(:instance_running, instance_ids: ids) do
           logger.info "waiting for #{ids.count} Neurons to start..."
         end
-        # TODO: tags
+        tag(ids, { key: 'project', value: to_camal(self.class.to_s) })
       rescue Aws::EC2::Errors::DryRunOperation => e
         ids = (1..(opts[:max_count] || 0)).to_a.map { |n| n.to_s }
         logger.info "waiting for #{ids.count} Neurons to start..."

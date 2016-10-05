@@ -1,3 +1,4 @@
+require 'cloud_powers'
 require_relative 'job'
 
 module Smash
