@@ -2,22 +2,25 @@ GEM
   remote: https://rubygems.org/
   specs:
     activesupport-core-ext (4.0.0.3)
-    aws-sdk (2.6.5)
-      aws-sdk-resources (= 2.6.5)
-    aws-sdk-core (2.6.5)
+    aws-sdk (2.6.9)
+      aws-sdk-resources (= 2.6.9)
+    aws-sdk-core (2.6.9)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.6.5)
-      aws-sdk-core (= 2.6.5)
+    aws-sdk-resources (2.6.9)
+      aws-sdk-core (= 2.6.9)
     byebug (9.0.6)
-    cloud_powers (0.2.3)
+    cloud_powers (0.2.7.10)
       activesupport-core-ext (~> 4)
       aws-sdk (~> 2)
       dotenv (~> 2.1)
       httparty (~> 0.14)
       rubyzip (~> 1.2)
+      websocket-eventmachine-client
+      websocket-eventmachine-server
       zip-zip (~> 0.3)
     diff-lcs (1.2.5)
     dotenv (2.1.1)
+    eventmachine (1.2.0.1)
     gmail (0.6.0)
       gmail_xoauth (>= 0.3.0)
       mail (>= 2.2.1)
@@ -37,7 +40,7 @@ GEM
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
       rspec-mocks (~> 3.5.0)
-    rspec-core (3.5.3)
+    rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -47,6 +50,16 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     rubyzip (1.2.0)
+    websocket (1.2.3)
+    websocket-eventmachine-base (1.2.0)
+      eventmachine (~> 1.0)
+      websocket (~> 1.0)
+      websocket-native (~> 1.0)
+    websocket-eventmachine-client (1.2.0)
+      websocket-eventmachine-base (~> 1.0)
+    websocket-eventmachine-server (1.0.1)
+      websocket-eventmachine-base (~> 1.0)
+    websocket-native (1.0.0)
     zip-zip (0.3)
       rubyzip (>= 1.0.0)
 
@@ -70,4 +83,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.5
+   1.13.2

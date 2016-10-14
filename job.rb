@@ -9,8 +9,26 @@ module Smash
     include CloudPowers::Synapse::Pipe
     include CloudPowers::Synapse::Queue
 
-    attr_reader :instance_id, :message, :message_body, :neuron_ids, :workflow
+    # self-instance-id +String+
+    attr_reader  :instance_id
+    # message that is used as a base for this Job
+    attr_reader  :message
+    # the parsed message body, containing the information about the job
+    attr_reader  :message_body
+    # all the other nodes this Cerebrum has started
+    attr_reader  :neuron_ids
+    # steps and states for this Job to follow while its alive
+    attr_reader  :workflow
 
+    # Create a new Job object and initializes some attributes.  The +msg+'s body is used
+    # to get an awareness of the job, context and the workflow
+    #
+    # Parameters
+    # * id +String+ - self-instance-id
+    # * msg +Aws::SQS+ message - gathered from a Queue and used to understand the current Job
+    # * opts +Hash+ (optional)
+    # * * +:workflow+ - the workflow this job will use
+    # * * all other key/value pairs will be used in other parts of the Job and Task instantiation
     def initialize(id, msg, opts = {})
       @neuron_ids = []
       @workflow = opts.delete(:workflow) || Workflow.new
@@ -42,7 +60,6 @@ module Smash
     def spin_up_neurons(opts = {})
       ids = nil
       begin
-        byebug
         response = ec2.run_instances(instance_config(opts))
         ids = response.instances.map(&:instance_id)
 

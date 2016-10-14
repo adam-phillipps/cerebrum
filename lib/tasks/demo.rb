@@ -50,7 +50,7 @@ module Smash
       messages.each do |message|
         send_queue_message(message, backlog_name)
       end
-      byebug
+
       # TODO: chunks
       ids = spin_up_neurons(max_count: messages.count)
       # 5. tag instances
