@@ -43,7 +43,7 @@ module Smash
       Dotenv.load("#{cerebrum.project_root}/.cerebrum.env")
       # TESTING
       cerebrum.ec2(Smash::CloudPowers::AwsStubs.node_stub)
-      cerebrum.sqs(Smash::CloudPowers::AwsStubs.queue_stub)
+      cerebrum.sqs(Smash::CloudPowers::AwsStubs.queue_stub(body: { task: 'true_roas' }.to_json))
       cerebrum.sns(Smash::CloudPowers::AwsStubs.broadcast_stub)
       cerebrum.kinesis(Smash::CloudPowers::AwsStubs.pipe_stub)
       cerebrum.boot_time
@@ -62,7 +62,7 @@ module Smash
     # * uses a count in the queue because we know each message is automatically deleted
     #   after it is read
     def more_work?
-      get_count(:job_requests) > 0
+      get_queue_message_count(:job_requests) > 0
     end
 
     # Begin working on this job.
