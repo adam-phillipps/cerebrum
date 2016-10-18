@@ -9,7 +9,7 @@ GEM
     aws-sdk-resources (2.6.9)
       aws-sdk-core (= 2.6.9)
     byebug (9.0.6)
-    cloud_powers (0.2.7.10)
+    cloud_powers (0.2.7.16)
       activesupport-core-ext (~> 4)
       aws-sdk (~> 2)
       dotenv (~> 2.1)

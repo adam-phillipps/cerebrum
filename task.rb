@@ -6,9 +6,10 @@ module Smash
     attr_reader :instance_url, :params
 
     def initialize(id, msg, opts = {})
-      @params = JSON.parse(msg.body)
-      @instance_id = id
-      @start_time = Time.now.to_i
+      @params       = msg
+      @instance_id  = id
+      @start_time   = Time.now.to_i
+      @opts = opts
       super(id, msg, opts)
     end
 

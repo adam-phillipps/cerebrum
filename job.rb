@@ -30,17 +30,21 @@ module Smash
     # * * +:workflow+ - the workflow this job will use
     # * * all other key/value pairs will be used in other parts of the Job and Task instantiation
     def initialize(id, msg, opts = {})
-      @neuron_ids = []
-      @workflow = opts.delete(:workflow) || Workflow.new
-      @instance_id = id
-      @message = msg
-      @message_body = msg.body
+      @neuron_ids   = []
+      @instance_id  = id
+      @message      = msg
     end
 
     def backlog
       CloudPowers::Synapse::Queue::Board.new('JobRequests')
     end
 
+    # Standard instance configuration.  These options can be overriden but if
+    # no overrides are needed, sensible defaults are given.
+    #
+    # Parameters
+    # * opts +Hash+ (optional) - all configuration options provided by aws are valid
+    # * * :image_id -
     def instance_config(opts = {})
       {
         dry_run:                  env(:testing) || false,
