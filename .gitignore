@@ -52,3 +52,4 @@ build-iPhoneSimulator/
 .byebug_history
 *.DS_Store
 lib/tasks/*
+.idea
