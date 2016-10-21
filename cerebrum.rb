@@ -89,13 +89,13 @@ module Smash
       end
 
       until job.done?
-        job.workflow.next!
+        job.next!
+
         pipe_to(:status_stream) do
-          job.sitrep(content: 'workflowInProgress', extraInfo: { state: job.state })
+          job.sitrep(content: 'workflowInProgress', extraInfo: { state: job.current_state })
         end
-        # TODO: Add the workflow back in right here.
-        job.run
-        @neuron_ids.concat(job.neuron_ids)
+
+        @neuron_ids.concat(job.neuron_ids - @neuron_ids)
       end
     end
 

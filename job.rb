@@ -1,7 +1,7 @@
 require 'cloud_powers'
 
 module Smash
-  class   Job
+  class Job
     extend CloudPowers::Delegator
     include CloudPowers::Auth
     include CloudPowers::AwsResources
