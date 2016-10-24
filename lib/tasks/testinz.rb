@@ -15,6 +15,11 @@ module Smash
       true
     end
 
+    def self.create(*args)
+      t = new(args)
+      t
+    end
+
     def sitrep(opts = {})
       opts
     end

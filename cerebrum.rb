@@ -1,5 +1,4 @@
 require 'dotenv'
-# Dotenv.load('.cerebrum.env')
 require 'cloud_powers'
 require 'stubs/aws_stubs'
 require 'pathname'
@@ -47,7 +46,6 @@ module Smash
       cerebrum.sns(Smash::CloudPowers::AwsStubs.broadcast_stub)
       cerebrum.kinesis(Smash::CloudPowers::AwsStubs.pipe_stub)
       cerebrum.boot_time
-      sleep 5
       # TESTING
       cerebrum.get_awareness!
       cerebrum
@@ -184,6 +182,7 @@ end
 
 # this will only run if the script was the main, not load'd or require'd
 if __FILE__==$0
+  byebug
   cerebrum = Smash::Cerebrum.create
   cerebrum.start!
 end
