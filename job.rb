@@ -1,7 +1,12 @@
 require 'cloud_powers'
+require 'brain_fund/cerebrum_functions'
+require 'brain_func/contexts'
+require 'brain_func/workflow_factory'
 
 module Smash
   class Job
+    include BrainFunc::CerebrumFunctions
+    include BrainFunc::workflow_factory
     extend CloudPowers::Delegator
     include CloudPowers::Auth
     include CloudPowers::AwsResources
@@ -20,93 +25,11 @@ module Smash
     # steps and states for this Job to follow while its alive
     attr_reader  :workflow
 
-    # Create a new Job object and initializes some attributes.  The +msg+'s body is used
-    # to get an awareness of the job, context and the workflow
-    #
-    # Parameters
-    # * id +String+ - self-instance-id
-    # * msg +Aws::SQS+ message - gathered from a Queue and used to understand the current Job
-    # * opts +Hash+ (optional)
-    # * * +:workflow+ - the workflow this job will use
-    # * * all other key/value pairs will be used in other parts of the Job and Task instantiation
-    def initialize(id, msg, opts = {})
-      @neuron_ids   = []
-      @instance_id  = id
-      @message      = msg
-    end
-
-    def backlog
-      CloudPowers::Synapse::Queue::Board.new('JobRequests')
-    end
-
-    # Standard instance configuration.  These options can be overriden but if
-    # no overrides are needed, sensible defaults are given.
-    #
-    # Parameters
-    # * opts +Hash+ (optional) - all configuration options provided by aws are valid
-    # * * :image_id -
-    def instance_config(opts = {})
-      {
-        dry_run:                  env(:testing) || false,
-        image_id:                 image('crawlbotprod').image_id, # image(:neuron).image_id
-        instance_type:            't2.nano',
-        min_count:                opts[:max_count],
-        max_count:                0,
-        key_name:                 'crawlBot',
-        security_groups:          ['webCrawler'],
-        security_group_ids:       ['sg-940edcf2'],
-        placement:                { availability_zone: 'us-west-2c' },
-        disable_api_termination:  'false',
-        instance_initiated_shutdown_behavior:   'terminate'
-      }.merge(opts)
-    end
-
-    def spin_up_neurons(opts = {})
-      ids = nil
-      begin
-        response = ec2.run_instances(instance_config(opts))
-        ids = response.instances.map(&:instance_id)
-
-        ec2.wait_until(:instance_running, instance_ids: ids) do
-          logger.info "waiting for #{ids.count} Neurons to start..."
-        end
-        tag(ids, { key: 'project', value: to_camal(self.class.to_s) })
-      rescue Aws::EC2::Errors::DryRunOperation => e
-        ids = (1..(opts[:max_count] || 0)).to_a.map { |n| n.to_s }
-        logger.info "waiting for #{ids.count} Neurons to start..."
-      end
-
-      @neuron_ids.concat(ids)
-      pipe_to(:status_stream) { sitrep(content: 'neuronsStarted', extraInfo: { ids:  ids }) }
-      ids
-    end
-
-    def sitrep_message(opts = {})
-      # TODO: find better implementation of merging nested hashes
-      # this should be fixed with ::Helper#update_message_body
-      extra_info = {}
-      if opts.kind_of?(Hash) && opts[:extraInfo]
-        custom_info = opts.delete(:extraInfo)
-        extra_info = { 'taskRunTime' => task_run_time }.merge(custom_info)
-      else
-        opts = {}
-      end
-
-      sitrep_alterations = {
-        type: 'SitRep',
-        content: to_pascal(state),
-        extraInfo: extra_info
-      }.merge(opts)
-      update_message_body(sitrep_alterations)
-    end
-
-    def state
-      @workflow.current
-    end
-
-    def task_run_time
-      # @start_time is in the Task class
-      Time.now.to_i - @start_time
+    def initialize(id, msg)
+      @instance_id = id
+      @message = msg
+      @neuron_ids = []
+      inject_workflow(msg[])
     end
   end
 end

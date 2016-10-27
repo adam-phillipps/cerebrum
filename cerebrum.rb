@@ -3,14 +3,14 @@ require 'cloud_powers'
 require 'stubs/aws_stubs'
 require 'pathname'
 require 'byebug'
-require_relative 'job'
-require_relative 'task'
+require 'brain_func/cerebrum_functions'
 
 module Smash
   class Cerebrum
     include Smash::CloudPowers
+    include Smash::BrainFunc
     # include Smash::CloudPowers::AwsStubs
-    include
+    # include
     attr_accessor :neuron_ids
 
     # Gathers some information about the Context this Cerebrum will run in and about
