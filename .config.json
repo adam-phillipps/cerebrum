@@ -1,0 +1,91 @@
+[{
+	"VAR_NAME": "AWS_ACCESS_KEY_ID",
+	"QUESTION": "Please provide your AWS access key id:",
+	"DEFAULT": "",
+	"COMMENT": "Aws access:",
+	"NEW_LINE": false
+}, {
+	"VAR_NAME": "AWS_SECRET_ACCESS_KEY",
+	"QUESTION": "Please provide your AWS secret access key:",
+	"DEFAULT": "",
+	"COMMENT": "",
+	"NEW_LINE": false
+}, {
+	"VAR_NAME": "AWS_REGION",
+	"QUESTION": "Please provide AWS region:",
+	"DEFAULT": "us-west-2",
+	"COMMENT": "Aws areas and auth-related locations",
+	"NEW_LINE": true
+}, {
+	"VAR_NAME": "AMI_NAME",
+	"QUESTION": "Please provide AWS AMI Name:",
+	"DEFAULT": "",
+	"COMMENT": "Aws Build info",
+	"NEW_LINE": true
+}, {
+	"VAR_NAME": "STATUS_STREAM",
+	"QUESTION": "Please provide AWS status stream name:",
+	"DEFAULT": "",
+	"COMMENT": "Aws kinesis stream names",
+	"NEW_LINE": true
+}, {
+	"VAR_NAME": "TASK_STORAGE",
+	"QUESTION": "Please provide AWS task storage bucket name:",
+	"DEFAULT": "",
+	"COMMENT": "Aws s3 buckets etc",
+	"NEW_LINE": true
+}, {
+	"VAR_NAME": "BACKLOG_QUEUE_ADDRESS",
+	"QUESTION": "Please provide AWS backlog queue address (sqs):",
+	"DEFAULT": "",
+	"COMMENT": "Aws sqs queue addresses",
+	"NEW_LINE": true
+}, {
+	"VAR_NAME": "WIP_QUEUE_ADDRESS",
+	"QUESTION": "Please provide AWS wip queue address (sqs):",
+	"DEFAULT": "",
+	"COMMENT": "",
+	"NEW_LINE": false
+}, {
+	"VAR_NAME": "FINISHED_QUEUE_ADDRESS",
+	"QUESTION": "Please provide AWS finished queue address (sqs):",
+	"DEFAULT": "",
+	"COMMENT": "",
+	"NEW_LINE": false
+}, {
+	"VAR_NAME": "COUNT_QUEUE_ADDRESS",
+	"QUESTION": "Please provide AWS count queue address (sqs):",
+	"DEFAULT": "",
+	"COMMENT": "",
+	"NEW_LINE": false
+}, {
+	"VAR_NAME": "NEEDS_ATTENTION_QUEUE_ADDRESS",
+	"QUESTION": "Please provide AWS need attention queue address (sqs):",
+	"DEFAULT": "",
+	"COMMENT": "",
+	"NEW_LINE": false
+}, {
+	"VAR_NAME": "LOG_BUCKET",
+	"QUESTION": "Please provide logs bucket name:",
+	"DEFAULT": "",
+	"COMMENT": "Logs",
+	"NEW_LINE": true
+}, {
+	"VAR_NAME": "LOG_FILE",
+	"QUESTION": "Please provide logs file name:",
+	"DEFAULT": "",
+	"COMMENT": "",
+	"NEW_LINE": false
+}, {
+	"VAR_NAME": "POLLING_SLEEP_TIME",
+	"QUESTION": "Please provide polling sleep time:",
+	"DEFAULT": "5",
+	"COMMENT": "Running options for job specific needs",
+	"NEW_LINE": true
+}, {
+	"VAR_NAME": "RATIO_DENOMINATOR",
+	"QUESTION": "Please provide ratio denominator:",
+	"DEFAULT": "1",
+	"COMMENT": "",
+	"NEW_LINE": false
+}]
