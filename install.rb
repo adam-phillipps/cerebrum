@@ -12,4 +12,4 @@ module Smash
   end
 end
 
-tester = Smash::Install.new
+Smash::Install.new
